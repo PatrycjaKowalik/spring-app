@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage wines</title>
+    <link rel="stylesheet" type="text/css"th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body style="background-color:#d1d1f4;">
+<div class="container-fluid text-center">
+    <br>
+    <div class="text-right">
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+            </p>
+            <input type="submit" class="btn btn-secondary m-2" value="Logout" style="background-color: #b30000; border: #b30000; color: black; font-size: 24px; font-weight: bold"/>
+        </form>
+    </div>
+
+    <div class="header">
+        <h1>Manage wines</h1>
+    </div>
+    <br>
+    <div th:if="${message}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+    <br>
+    <div  style="display: grid; justify-content:space-around;">
+            <div class="inline-block">
+                <img style="max-width:20%; " src="../static/images/woman.png" th:src="@{images/woman.png}"/>
+            </div>
+        <div style="display: grid;">
+            <div class="inline-block">
+                <button type="button" class="btn btn-secondary m-2" onclick="addNewWineForm()" style="background-color: #b30000; border: #b30000; color: black; font-size: 24px"><b>Add New Wine</b></button>
+            </div>
+        </div>
+        <br>
+        <div style="display: grid;">
+            <div class="inline-block">
+                <button type="button" class="btn btn-secondary m-2" onclick="read()" style="background-color: #b30000; border: #b30000; color: black; font-size: 24px"><b>Read Comments</b></button>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <div>
+        <table class="table table-bordered">
+            <thead style="background-color: #666699">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Grapes</th>
+                    <th>Country</th>
+                    <th>Year</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="wine : ${listWines}">
+                <tr>
+                    <td>[[${wine.id}]]</td>
+                    <td>[[${wine.name}]]</td>
+                    <td>[[${wine.grapes}]]</td>
+                    <td>[[${wine.country}]]</td>
+                    <td>[[${wine.year}]]</td>
+                    <td>
+                        <a class="h4 mr-3" th:href="@{'/wines/edit/' + ${wine.id}} " style="color: #b30000">Edit</a>
+                        <a class="h4 mr-3" th:href="@{'/wines/delete/' + ${wine.id}} " style="color: #b30000">Delete</a>
+                        <a class="h4" th:href="@{'/wines/comment/' + ${wine.id}}" style="color: #b30000">Comment</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    function addNewWineForm(){
+        window.location = "[[@{/wines/new}]]";
+    }
+    function read(){
+        window.location = "[[@{/wines/comments}]]";
+    }
+    function logout(){
+        window.location = "[[@{/}]]";
+    }
+</script>
+</body>
+</html>

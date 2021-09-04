@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Success</title>
+    <link rel="stylesheet" type="text/css"th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body style="background-color:#d1d1f4;">
+    <div class="container text-center">
+        <div>
+            <br>
+            <h1>You have signed up successfully!</h1>
+        </div>
+        <br>
+        <div style="display: flex; justify-content:space-around;">
+            <div class="inline-block">
+                <img  style="max-width:90%; max-height: 90%" src="../static/images/wine.png" th:src="@{images/wine.png}"/>
+            </div>
+        </div>
+        <div class="inline-block">
+            <h2>You can login to VINEYARD now!</h2>
+            <br>
+        </div>
+        <div style="display: flex; justify-content:space-around;">
+            <div class="inline-block">
+                <button type="button" class="btn btn-secondary m-2" onclick="loginForm()" style="background-color: #b30000; border: #b30000; color: black; font-size: 24px">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function loginForm(){
+            window.location = "[[@{/login}]]";
+
+        }
+    </script>
+</body>
+</html>
