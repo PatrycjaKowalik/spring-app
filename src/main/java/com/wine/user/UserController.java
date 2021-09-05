@@ -31,6 +31,10 @@ public class UserController {
 
     @PostMapping("/process_register")
     public String processRegistration(User user){
+        User userExists = repo.findByEmail(user.getEmail());
+        if (userExists != null) {
+             throw new IllegalStateException("Email already taken!");
+        }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
