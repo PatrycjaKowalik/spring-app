@@ -32,9 +32,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         throw new UserNotFoundException("Could not find any user with ID" + id);
     }
-    
-    public User fetchUserByEmailId(String email){
-        return repo.findByEmailId(email);
-    }
+   
 
 }
